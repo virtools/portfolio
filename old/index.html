@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet" />
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+
+      * {
+        font-family: "Noto Sans TC", var(--font-family-sans-serif);
+      }
+      /*.bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }*/
+      .img {
+        display: block;
+        /*width: 100%;*/
+        /*height: 225px;*/
+        padding-bottom: 52%;
+        /*min-height: 225px;*/
+        background-color: #ddd;
+        /*background-size: 1150px;
+        background-position: -165px;*/
+        background-size: cover;
+      }
+      .img01 {
+        width: 100%;
+        padding-bottom: 30%;
+        background-color: #ddd;
+        min-height: 225px;
+        max-height: 500px;
+      }
+      .img-r {
+        background-color: brown;
+      }
+      .img-g {
+        background-color: chartreuse;
+      }
+      .img-b {
+        background-color: cyan;
+      }
+      .navbar {
+        background-image: url(./img/navbar_bg.png);
+        background-size: 300px;
+      }
+      @media (min-width: 576px) {
+      }
+      @media (min-width: 768px) {
+        .img {
+          padding-bottom: 52%;
+        }
+      }
+      @media (min-width: 992px) {
+        .img {
+          padding-bottom: 70%;
+        }
+      }
+      @media (min-width: 1200px) {
+        .img {
+          padding-bottom: 80%;
+        }
+      }
+      .parallax-window {
+        min-height: 400px;
+        background: transparent;
+      }
+      /*.img {
+        -webkit-filter: url("#filter");
+        filter: url("#filter");
+      }*/
+      .svg-filters {
+        display: none;
+      }
+    </style>
+    <title>Portfolio</title>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
+      <defs>
+        <filter id="filter" x="0" y="0" width="100%" height="100%">
+          <!-- <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" result="warp" /> -->
+          <!-- <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="30" in="SourceGraphic" in2="warp" /> -->
+          <!-- <feGaussianBlur stdDeviation="10 0" /> -->
+          <!-- <feComponentTransfer>
+            <feFuncA type="table" tableValues="1 1" />
+          </feComponentTransfer> -->
+          <!-- <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
+            <feSpotLight
+              id="spotlight"
+              x="500"
+              y="100"
+              z="150"
+              pointsAtX="500"
+              pointsAtY="100"
+              pointsAtZ="0"
+              specularExponent="12"
+              limitingConeAngle="70"
+            />
+          </feDiffuseLighting> -->
+          <!-- <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
+            <feSpotLight
+              id="spotlight"
+              x="500"
+              y="100"
+              z="150"
+              pointsAtX="500"
+              pointsAtY="100"
+              pointsAtZ="0"
+              specularExponent="12"
+              limitingConeAngle="70"
+            />
+          </feDiffuseLighting>
+
+          <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha" />
+          <feComponentTransfer in="alphaMap" result="invertlight">
+            <feFuncA type="table" tableValues="1 0 0" />
+          </feComponentTransfer>
+
+          <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="5" />
+          <feComposite operator="xor" result="infocus" in2="SourceGraphic" in="featherspot" />
+          <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="2" />
+          <feComposite operator="over" in="infocus" in2="outfocus" />
+          <feComposite operator="in" in2="SourceGraphic" /> -->
+        </filter>
+      </defs>
+    </svg>
+    <template id="card_template">
+      <div class="card mb-4 shadow-sm">
+        <div class="img card-img-top" :style="{backgroundImage:'url('+img_url+')'}"></div>
+        <div class="card-body">
+          <h5 class="card-title">{{title}}</h5>
+          <p class="card-text">
+            {{content}}
+          </p>
+          <div class="d-flex justify-content-start">
+            <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
+            <a
+              class="flex-fill btn btn-sm btn-secondary mr-2"
+              role="button"
+              :href="code_url"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              >檢視代碼</a
+            >
+            <a
+              class="flex-fill btn btn-sm btn-success"
+              role="button"
+              :href="demo_url"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              >演示</a
+            >
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+    </template>
+    <div id="app" v-cloak>
+      <header class="sticky-top">
+        <div class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+          <div class="container d-flex justify-content-between">
+            <a href="javascript:void(0);" class="navbar-brand d-flex align-items-center">
+              <img src="./img/logo.png" class="img-thumbnail mr-2" />
+              <strong>Portfolio</strong>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <!-- <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+              </ul> -->
+              <!-- <form class="form-inline my-2 my-lg-0 ml-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-success my-2 my-sm-0" type="submit">搜尋</button>
+              </form> -->
+            </div>
+            <!-- <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarHeader"
+              aria-controls="navbarHeader"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button> -->
+          </div>
+        </div>
+      </header>
+      <main>
+        <!--<section>
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="img01 d-block w-100 img-r"></div>
+              </div>
+              <div class="carousel-item">
+                <div class="img01 d-block w-100 img-g"></div>
+              </div>
+              <div class="carousel-item">
+                <div class="img01 d-block w-100 img-b"></div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </section>-->
+        <!--<div class="container"></div>-->
+        <section>
+          <div class="container mt-4">
+            <h3>
+              前端修練精神時光屋-第二屆
+            </h3>
+            <div class="my-4">
+              <h6>
+                由六角學院與Adobe XD Taiwan社群所舉辦的「<a
+                  href="https://challenge.thef2e.com/"
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  >The F2E - 第二屆 前端 & UI 修練精神時光屋</a
+                >」
+              </h6>
+              <h6>
+                一週挑戰一個修練主題，總計九週 (2019/7/4-2019/9/9)，可挑選「前端工程師」、「UI 設計師」的挑戰方向。
+              </h6>
+              <h6 class="my-4">
+                <a
+                  class="btn btn-sm btn-outline-primary"
+                  role="button"
+                  href="https://challenge.thef2e.com/user/2241"
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  >活動網站的作品</a
+                >
+              </h6>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-lg-4 col-xl-3" v-for="(item) in list">
+                <card_component
+                  :title="item.title"
+                  :content="item.content"
+                  :img_url="item.img_url"
+                  :code_url="item.code_url"
+                  :demo_url="item.demo_url"
+                ></card_component>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- <div class="container">
+          <img src="./img/item_bg01.jpeg" />
+        </div> -->
+        <!-- <div class="parallax-window" data-parallax="scroll" data-image-src="./img/item_bg01.jpeg"></div> -->
+        <section>
+          <div class="container mt-4">
+            <h3>個人</h3>
+          </div>
+        </section>
+        <section>
+          <div class="container mt-4">
+            <div class="row">
+              <div class="col-md-6 col-lg-4 col-xl-3" v-for="item in 12">
+                <card_component></card_component>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script> -->
+    <script>
+      Vue.component("card_component", {
+        props: {
+          title: String,
+          content: String,
+          img_url: String,
+          code_url: String,
+          demo_url: String,
+        },
+        template: "#card_template",
+      });
+      const app = new Vue({
+        el: "#app",
+        data: {
+          list: [
+            {
+              title: "第一關：番茄鐘",
+              content: "",
+              img_url: "./img/item01.jpg",
+              code_url: "https://github.com/virtools/POMODORO",
+              demo_url: "https://virtools.github.io/POMODORO/",
+            },
+            {
+              title: "第二關：新接龍",
+              content: "",
+              img_url: "./img/item02.jpg",
+              code_url: "https://github.com/virtools/FREECELL",
+              demo_url: "https://virtools.github.io/FREECELL/",
+            },
+            {
+              title: "第三關：MP3撥放器",
+              content: "",
+              img_url: "./img/item03.jpg",
+              code_url: "https://github.com/virtools/MP3PLAYER",
+              demo_url: "https://virtools.github.io/MP3PLAYER/",
+            },
+            {
+              title: "第四關：線上支付",
+              content: "",
+              img_url: "./img/item04.jpg",
+              code_url: "https://github.com/virtools/PAYMENT",
+              demo_url: "https://virtools.github.io/PAYMENT/",
+            },
+            {
+              title: "第五關：90秒挑戰遊戲",
+              content: "",
+              img_url: "./img/item05.jpg",
+              code_url: "https://github.com/virtools/90SGAME_0",
+              demo_url: "https://virtools.github.io/90SGAME_0/",
+            },
+            {
+              title: "第六關：訂房網站",
+              content: "",
+              img_url: "./img/item06.jpg",
+              code_url: "https://github.com/virtools/RESERVATION",
+              demo_url: "https://virtools.github.io/RESERVATION/",
+            },
+            {
+              title: "第七關：匿名聊天",
+              content: "",
+              img_url: "./img/item07.jpg",
+              code_url: "https://github.com/virtools/CHATROOM0",
+              demo_url: "https://virtools.github.io/CHATROOM0/",
+            },
+            {
+              title: "第八關：雲端硬碟",
+              content: "",
+              img_url: "./img/item08.jpg",
+              code_url: "https://github.com/virtools/CLOUD-STORAGE",
+              demo_url: "https://virtools.github.io/CLOUD-STORAGE/",
+            },
+            {
+              title: "第九關：筆記軟體",
+              content: "",
+              img_url: "./img/item09.jpg",
+              code_url: "https://github.com/virtools/NOTE",
+              demo_url: "https://virtools.github.io/NOTE/",
+            },
+            {
+              title: "第十關：口罩地圖",
+              content: "",
+              img_url: "./img/item10.jpg",
+              code_url: "https://github.com/virtools/MASKMAP",
+              demo_url: "https://virtools.github.io/MASKMAP/",
+            },
+          ],
+        },
+        mounted() {},
+      });
+      //$(".parallax-window").parallax();
+      /*$(".btn").on("click", (e) => {
+        console.log(e);
+      });*/
+      /*Waves.attach(".btn");
+      Waves.attach(".img");
+      Waves.init();*/
+      //console.log($(".btn"));
+      //window.onload = function () {};
+      //electricity,codeFalls,voronoiDiagram,tetris,snake,maze,particlesbase,shadowCasting
+      //calc,flipClock,pageTurning,pathDrag
+    </script>
+  </body>
+</html>
