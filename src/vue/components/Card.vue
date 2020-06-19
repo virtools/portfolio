@@ -5,7 +5,7 @@
       :style="{ backgroundImage: 'url(' + img_url + ')', backgroundPosition:img_align}"
     ></div>
     <div class="card-body">
-      <h5 class="card-title">{{ title }}</h5>
+      <h6 class="card-title">{{ title }}</h6>
       <p class="card-text">{{ content }}</p>
       <div class="d-flex justify-content-start">
         <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->

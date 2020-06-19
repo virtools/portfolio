@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <header class="sticky-top">
       <div class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
         <div class="container d-flex justify-content-between">
@@ -33,6 +33,8 @@
             >活動網站的作品</a>
           </h6>
         </div>
+      </div>
+      <div class="container mt-4">
         <div class="row">
           <div class="col-md-6 col-lg-4 col-xl-3" v-for="item in F2E_list" :key="item.id">
             <card
@@ -50,8 +52,6 @@
       <div class="container mt-4">
         <h3>個人</h3>
       </div>
-    </section>
-    <section>
       <div class="container mt-4">
         <div class="row">
           <div class="col-md-6 col-lg-4 col-xl-3" v-for="item in personal_list" :key="item.id">
@@ -70,6 +70,7 @@
     <footer>
       <div class="info"></div>
     </footer>
+    <!-- <div class="side"></div> -->
   </div>
 </template>
 <script>
@@ -106,6 +107,20 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
 * {
   font-family: "Noto Sans TC", var(--font-family-sans-serif);
+}
+.wrap {
+  position: relative;
+  /*background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png)
+    #f3f3f3;*/
+}
+.side {
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: 100%;
+  background-color: #eee;
+  right: 0px;
+  top: 0px;
 }
 .img {
   display: block;
