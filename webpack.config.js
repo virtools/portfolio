@@ -2,7 +2,9 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const WebpackCopyPlugin = require("copy-webpack-plugin");
+const WebpackCopyPlugin = require("copy-webpack-plugin"); //資料複製
+const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin"); //壓縮css
+const { CleanWebpackPlugin } = require("clean-webpack-plugin"); //清除檔案資料
 module.exports = {
   /*build: {
     assetsPublicPath: "/dist/",
@@ -59,7 +61,7 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "img/[name].[ext]",
+              name: "img/[name].[hash].[ext]",
               publicPath: "../",
               //outputPath: "/",
             },
@@ -80,6 +82,10 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin({
+      //cleanOnceBeforeBuildPatterns: ["./js/*", "./css/*", "./fonts/*", "./index,html"],
+      cleanOnceBeforeBuildPatterns: ["./*"],
+    }),
     new WebpackCopyPlugin({
       patterns: [{ from: "./src/assets", to: "assets" }],
     }),
@@ -90,5 +96,6 @@ module.exports = {
       template: "./src/index.html",
       filename: "index.html",
     }),
+    new OptimizeCssAssetsWebpackPlugin(),
   ],
 };

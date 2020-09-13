@@ -16,11 +16,9 @@
         <div class="my-4">
           <h6>
             由六角學院與Adobe XD Taiwan社群所舉辦的「
-            <a
-              href="https://challenge.thef2e.com/"
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-            >The F2E - 第二屆 前端 & UI 修練精神時光屋</a>」
+            <a href="https://challenge.thef2e.com/" target="_blank" rel="nofollow noopener noreferrer"
+              >The F2E - 第二屆 前端 & UI 修練精神時光屋</a
+            >」
           </h6>
           <h6>一週挑戰一個修練主題，總計九週 (2019/7/4-2019/9/9)，可挑選「前端工程師」、「UI 設計師」的挑戰方向。</h6>
           <h6 class="my-4">
@@ -30,7 +28,8 @@
               href="https://challenge.thef2e.com/user/2241"
               target="_blank"
               rel="nofollow noopener noreferrer"
-            >活動網站的作品</a>
+              >活動網站的作品</a
+            >
           </h6>
         </div>
       </div>
@@ -82,24 +81,20 @@ export default {
   data() {
     return {
       F2E_list: [],
-      personal_list: []
+      personal_list: [],
     };
   },
   mounted() {
-    Axios.get("dataList", { data: { filters: { tags: "F2E" } } }).then(
-      response => {
-        this.F2E_list = response.data;
-      }
-    );
-    Axios.get("dataList", { data: { filters: { tags: "personal" } } }).then(
-      response => {
-        this.personal_list = response.data;
-      }
-    );
+    Axios.get("dataList", { data: { filters: { tags: "F2E" } } }).then((response) => {
+      this.F2E_list = response.data;
+    });
+    Axios.get("dataList", { data: { filters: { tags: "personal" } } }).then((response) => {
+      this.personal_list = response.data;
+    });
     /*.catch((error) => {
         throw new Error(error);
       });*/
-  }
+  },
 };
 </script>
 <!--<style scoped></style>-->
