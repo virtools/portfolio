@@ -183,6 +183,14 @@ const dataList = [
     demo_url: "https://virtools.github.io/particleCollision/particleCollision-quadTree/",
     tags: "personal",
   },
+  {
+    title: "粒子文字效果",
+    content: "",
+    img_url: "./assets/personal/particleText.jpg",
+    code_url: "https://github.com/virtools/particleText/",
+    demo_url: "https://virtools.github.io/particleText/",
+    tags: "personal",
+  },
 ];
 
 //electricity,codeFalls,voronoiDiagram,tetris,snake,maze,particlesbase,shadowCasting
