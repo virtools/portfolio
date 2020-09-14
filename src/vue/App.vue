@@ -8,7 +8,7 @@
         <div class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
           <div class="container d-flex justify-content-between">
             <a href="javascript:void(0);" class="navbar-brand d-flex align-items-center">
-              <img :src="img_logo" class="img-thumbnail mr-2" />
+              <!-- <img :src="img_logo" class="img-thumbnail mr-2" /> -->
               <strong>Portfolio</strong>
             </a>
           </div>
