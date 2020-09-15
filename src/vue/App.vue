@@ -1,7 +1,8 @@
 <template>
   <div class="wrap">
     <div class="bg position-fixed d-block vw-100 vh-100">
-      <canvas ref="canvas"></canvas>
+      <canvas id="canvas01" ref="canvas01"></canvas>
+      <canvas id="canvas02" ref="canvas02"></canvas>
     </div>
     <div class="content">
       <header class="sticky-top">
@@ -81,8 +82,12 @@
 <script>
 import img_logo from "@img/logo.png";
 import {
+  setShadow,
+  clearShadow,
   Rect,
   pushVector,
+  getDistance,
+  toPosRate,
   triangulationCreate,
   voronoiCreate,
 } from "@js/voronoi_diagram.js";
@@ -223,38 +228,105 @@ export default {
     function calcVoronoi(posList) {
       triangulationData = triangulationCreate(posList);
 
-      polygonList = voronoiCreate(
+      polygon = voronoiCreate(
         posList,
         triangulationData.triangleList,
         triangulationData.shell,
         mainRect
       );
+      polygonList = polygon.polygonListShow;
     }
-    let canvas, ctx, cWidth, cHeight;
-    canvas = this.$refs.canvas;
-    ctx = canvas.getContext("2d");
+    let canvas01, ctx01, canvas02, ctx02, cWidth, cHeight;
+    canvas01 = this.$refs.canvas01;
+    ctx01 = canvas01.getContext("2d");
+    canvas02 = this.$refs.canvas02;
+    ctx02 = canvas02.getContext("2d");
 
-    cWidth = canvas.width = window.innerWidth;
-    cHeight = canvas.height = window.innerHeight;
+    cWidth = canvas01.width = canvas02.width = window.innerWidth;
+    cHeight = canvas01.height = canvas02.height = window.innerHeight;
 
     let mainRect = new Rect(0, 0, cWidth, cHeight);
     let posList;
     let triangulationData;
     let polygonList;
+    let polygon;
 
-    function draw() {
+    let lineLink;
+
+    function draw(ctx) {
       ctx.clearRect(0, 0, cWidth, cHeight);
       ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, cWidth, cHeight);
       drawVoronoi(ctx, polygonList, {
-        strokeStyle: "rgba(240,240,240,1.0)",
+        strokeStyle: "rgba(230,230,230,1.0)",
+        //strokeStyle: "rgba(200,200,200,1.0)",
         fillStyle: "rgba(255,255,255,1.0)",
       });
+
+      /*ctx.fillStyle = "#ff0000";
+      lineLink[0].forEach((value, index) => {
+        let p = polygon.polygonPosList[value];
+        ctx.beginPath();
+        ctx.arc(p[0], p[1], 5, 0, 2 * Math.PI, false);
+        ctx.fill();
+      });*/
     }
     function init() {
       posList = resetPosList(1000);
       calcVoronoi(posList);
-      draw();
+      lineLink = [];
+      polygon.polygonIndexList.forEach((indexList) => {
+        for (let i = 0; i < indexList.length; i++) {
+          if (!lineLink[indexList[i]]) {
+            lineLink[indexList[i]] = [];
+          }
+          let data;
+          data = indexList[(i - 1 + indexList.length) % indexList.length];
+          if (!lineLink[indexList[i]].some((value) => value === data)) {
+            lineLink[indexList[i]].push(data);
+          }
+          data = indexList[(i + 1) % indexList.length];
+          if (!lineLink[indexList[i]].some((value) => value === data)) {
+            lineLink[indexList[i]].push(data);
+          }
+        }
+      });
+      draw(ctx01);
+
+      time = 0;
+      interval = 0.05;
+      totalDistance = 0;
+      /*moveIndexList = [];
+      addMoveIndex(moveIndexList);
+      addMoveIndex(moveIndexList, moveIndexList[moveIndexList.length - 1]);
+      addMoveIndex(moveIndexList, moveIndexList[moveIndexList.length - 1]);
+      addMoveIndex(moveIndexList, moveIndexList[moveIndexList.length - 1]);
+      addMoveIndex(moveIndexList, moveIndexList[moveIndexList.length - 1]);
+      addMoveIndex(moveIndexList, moveIndexList[moveIndexList.length - 1]);*/
+      for (let i = 0; i < moveIndexListG.length; i++) {
+        moveIndexListG[i] = [];
+        addMoveIndex(moveIndexListG[i]);
+        addMoveIndex(
+          moveIndexListG[i],
+          moveIndexListG[i][moveIndexListG[i].length - 1]
+        );
+        addMoveIndex(
+          moveIndexListG[i],
+          moveIndexListG[i][moveIndexListG[i].length - 1]
+        );
+        addMoveIndex(
+          moveIndexListG[i],
+          moveIndexListG[i][moveIndexListG[i].length - 1]
+        );
+        addMoveIndex(
+          moveIndexListG[i],
+          moveIndexListG[i][moveIndexListG[i].length - 1]
+        );
+        addMoveIndex(
+          moveIndexListG[i],
+          moveIndexListG[i][moveIndexListG[i].length - 1]
+        );
+      }
     }
     const debounce = function (func, delay = 250) {
       let timeout = null;
@@ -268,27 +340,101 @@ export default {
       };
     };
     function resize() {
-      mainRect.width = cWidth = canvas.width = window.innerWidth;
-      mainRect.height = cHeight = canvas.height = window.innerHeight;
+      mainRect.width = cWidth = canvas01.width = canvas02.width =
+        window.innerWidth;
+      mainRect.height = cHeight = canvas01.height = canvas02.height =
+        window.innerHeight;
       init();
     }
 
-    init();
-    window.addEventListener("resize", debounce(resize));
-
     let oldTime = Date.now();
+    let moveIndexListG = [];
+    //let moveIndexList;
+    let time;
+    let interval;
+    let totalDistance;
+    let maxDistance = 300;
+    for (let i = 0; i < 5; i++) {
+      moveIndexListG.push([]);
+    }
+
+    function addMoveIndex(moveIndexList, index = -1) {
+      for (let i = 0; i < 10; i++) {
+        let num =
+          index === -1
+            ? Math.floor(Math.random() * polygon.polygonPosList.length)
+            : lineLink[index][
+                Math.floor(Math.random() * lineLink[index].length)
+              ];
+        if (!moveIndexList.some((value) => value === num)) {
+          moveIndexList.push(num);
+          return;
+        }
+      }
+    }
     function animate() {
       requestAnimationFrame(animate);
       let nowTime = Date.now();
       let delta = (nowTime - oldTime) / 1000;
       oldTime = nowTime;
-      /*posList.forEach((value) => {
-        value[0] += 2 * Math.random() - 1;
-        value[1] += 2 * Math.random() - 1;
-      });
-      calcVoronoi(posList);
-      draw();*/
+
+      time += delta;
+      if (time >= interval) {
+        time %= interval;
+
+        /*addMoveIndex(moveIndexList, moveIndexList[moveIndexList.length - 1]);
+        moveIndexList.shift();*/
+        for (let i = 0; i < moveIndexListG.length; i++) {
+          addMoveIndex(
+            moveIndexListG[i],
+            moveIndexListG[i][moveIndexListG[i].length - 1]
+          );
+          moveIndexListG[i].shift();
+        }
+      }
+
+      //ctx02.clearRect(0, 0, cWidth, cHeight);
+      ctx02.save();
+      ctx02.globalCompositeOperation = "destination-out";
+      ctx02.fillStyle = "rgba(0,0,0,0.1)";
+      ctx02.fillRect(0, 0, cWidth, cHeight);
+      ctx02.clip();
+      ctx02.restore();
+
+      ctx02.globalCompositeOperation = "source-over";
+      ctx02.lineWidth = 1;
+      ctx02.fillStyle = "none";
+      ctx02.strokeStyle = "rgba(150,200,200,0.75)";
+      ctx02.lineJoin = "round";
+      ctx02.lineCap = "round";
+
+      ctx02.beginPath();
+      setShadow(ctx02, 0, 0, 5, "rgba(200,250,250,0.2)");
+
+      for (let i = 0; i < moveIndexListG.length; i++) {
+        moveIndexListG[i].forEach((value, index, array) => {
+          let p = polygon.polygonPosList[value];
+          if (index == 0) {
+            let p1 = polygon.polygonPosList[array[(index + 1) % array.length]];
+            let p2 = toPosRate(p, p1, time / interval);
+            ctx02.moveTo(p2[0], p2[1]);
+          } else if (index == array.length - 1) {
+            let p1 =
+              polygon.polygonPosList[
+                array[(index - 1 + array.length) % array.length]
+              ];
+            let p2 = toPosRate(p, p1, 1 - time / interval);
+            ctx02.lineTo(p2[0], p2[1]);
+          } else {
+            ctx02.lineTo(p[0], p[1]);
+          }
+        });
+        ctx02.stroke();
+      }
+      clearShadow(ctx02);
     }
+    window.addEventListener("resize", debounce(resize));
+    resize();
     animate();
   },
 };
@@ -305,10 +451,18 @@ export default {
     #f3f3f3;*/
 }
 .content {
+  /* display: none; */
 }
 .bg {
   background-color: #fff;
   z-index: -1;
+}
+#canvas01,
+#canvas02 {
+  position: absolute;
+  display: block;
+  left: 0px;
+  top: 0px;
 }
 .side {
   position: absolute;
