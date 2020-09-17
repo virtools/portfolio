@@ -277,7 +277,7 @@ export default {
       //ctx02.clearRect(0, 0, cWidth, cHeight);
       ctx02.save();
       ctx02.globalCompositeOperation = "destination-out";
-      ctx02.fillStyle = "rgba(0,0,0,0.05)";
+      ctx02.fillStyle = "rgba(0,0,0,0.1)";
       ctx02.fillRect(0, 0, cWidth, cHeight);
       ctx02.clip();
       ctx02.restore();
@@ -294,7 +294,7 @@ export default {
 
       for (let i = 0; i < moveIndexListG.length; i++) {
         ctx02.strokeStyle = `hsla(${colorList[i]},100%,75%,0.85)`;
-        setShadow(ctx02, 0, 0, 5, `hsla(${colorList[i]},75%,75%,0.05)`);
+        setShadow(ctx02, 0, 0, 5, `hsla(${colorList[i]},100%,65%,0.1)`);
         moveIndexListG[i].forEach((value, index, array) => {
           let p = polygon.polygonPosList[value];
           if (index == 0) {
