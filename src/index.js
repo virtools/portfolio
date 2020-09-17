@@ -1,3 +1,4 @@
+import "material-design-icons/iconfont/material-icons.css";
 import Vue from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 import App from "./vue/App";

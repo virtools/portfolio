@@ -52,7 +52,15 @@ module.exports = {
       //css提取
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../",
+            },
+          },
+          "css-loader",
+        ],
       },
       //圖檔載入器
       {
@@ -62,8 +70,8 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "img/[name].[hash].[ext]",
-              publicPath: "../",
-              //outputPath: "/",
+              /*publicPath: "../",*/
+              /*outputPath: "/",*/
             },
           },
         ],
@@ -79,6 +87,20 @@ module.exports = {
           },
         },
       },*/
+      //字型載入器
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "fonts/[name].[hash].[ext]",
+              /*publicPath: "../",*/
+              //outputPath: "./",
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
