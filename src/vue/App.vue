@@ -13,14 +13,18 @@
         </div>
       </header>
       <section>
-        <div class="container mt-4">
+        <div class="title-sticky container mt-4 p-3">
           <h3>前端修練精神時光屋-第二屆</h3>
+        </div>
+        <div class="container mt-4">
           <div class="my-4">
             <h6>
               由六角學院與Adobe XD Taiwan社群所舉辦的「
-              <a href="https://challenge.thef2e.com/" target="_blank" rel="nofollow noopener noreferrer"
-                >The F2E - 第二屆 前端 & UI 修練精神時光屋</a
-              >」
+              <a
+                href="https://challenge.thef2e.com/"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >The F2E - 第二屆 前端 & UI 修練精神時光屋</a>」
             </h6>
             <h6>一週挑戰一個修練主題，總計九週 (2019/7/4-2019/9/9)，可挑選「前端工程師」、「UI 設計師」的挑戰方向。</h6>
             <h6 class="my-4">
@@ -30,8 +34,7 @@
                 href="https://challenge.thef2e.com/user/2241"
                 target="_blank"
                 rel="nofollow noopener noreferrer"
-                >活動網站的作品</a
-              >
+              >活動網站的作品</a>
             </h6>
           </div>
         </div>
@@ -50,7 +53,7 @@
         </div>
       </section>
       <section>
-        <div class="container mt-4">
+        <div class="title-sticky container mt-4 p-3">
           <h3>個人</h3>
         </div>
         <div class="container mt-4">
@@ -78,7 +81,10 @@
               </div>
               <div class="email ml-2">
                 <i class="material-icons align-middle">email</i>
-                <a class="align-middle" href="mailto:flashmx29403229@gmail.com">flashmx29403229@gmail.com</a>
+                <a
+                  class="align-middle"
+                  href="mailto:flashmx29403229@gmail.com"
+                >flashmx29403229@gmail.com</a>
               </div>
             </div>
           </div>
@@ -105,12 +111,16 @@ export default {
     };
   },
   mounted() {
-    Axios.get("dataList", { data: { filters: { tags: "F2E" } } }).then((response) => {
-      this.F2E_list = response.data;
-    });
-    Axios.get("dataList", { data: { filters: { tags: "personal" } } }).then((response) => {
-      this.personal_list = response.data;
-    });
+    Axios.get("dataList", { data: { filters: { tags: "F2E" } } }).then(
+      (response) => {
+        this.F2E_list = response.data;
+      }
+    );
+    Axios.get("dataList", { data: { filters: { tags: "personal" } } }).then(
+      (response) => {
+        this.personal_list = response.data;
+      }
+    );
     /*.catch((error) => {
         throw new Error(error);
       });*/
@@ -171,6 +181,13 @@ export default {
 .info a[href]:hover {
   color: #2373a1;
   text-decoration: underline;
+}
+.title-sticky {
+  /*position: sticky;
+  top: 56px;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.2);
+  text-shadow: 0px 0px 5px #fff;*/
 }
 @media (min-width: 576px) {
 }
