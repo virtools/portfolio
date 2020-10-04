@@ -192,6 +192,22 @@ const dataList = [
     demo_url: "https://virtools.github.io/particleText/",
     tags: "personal",
   },
+  {
+    title: "滾動效果",
+    content: "",
+    img_url: "./assets/personal/scrollEffect.jpg",
+    code_url: "https://github.com/virtools/scrollEffect/",
+    demo_url: "https://virtools.github.io/scrollEffect/",
+    tags: "personal",
+  },
+  {
+    title: "潑漆效果",
+    content: "",
+    img_url: "./assets/personal/splashPaint.jpg",
+    code_url: "https://github.com/virtools/splashPaint/",
+    demo_url: "https://virtools.github.io/splashPaint/",
+    tags: "personal",
+  },
 ];
 
 //electricity,codeFalls,voronoiDiagram,tetris,snake,maze,particlesbase,shadowCasting
