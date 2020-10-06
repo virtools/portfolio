@@ -1,7 +1,9 @@
 <template>
-  <div class="bg position-fixed d-block vw-100 vh-100">
-    <canvas id="canvas01" ref="canvas01"></canvas>
-    <canvas id="canvas02" ref="canvas02"></canvas>
+  <div class="bg d-block">
+    <div class="bg_wrap d-block vw-100 vh-100">
+      <canvas id="canvas01" ref="canvas01"></canvas>
+      <canvas id="canvas02" ref="canvas02"></canvas>
+    </div>
   </div>
 </template>
 <script>
@@ -173,7 +175,9 @@ export default {
       });*/
     }
     function init() {
-      posList = resetPosList(1000);
+      const N = Math.ceil((cWidth * cHeight) / 1800);
+      console.log(N);
+      posList = resetPosList(N);
       calcVoronoi(posList);
       lineLink = [];
       polygon.polygonIndexList.forEach((indexList) => {
@@ -357,8 +361,15 @@ export default {
 </script>
 <style scoped>
 .bg {
+  position: absolute;
   background-color: #fff;
-  z-index: -1;
+  /* z-index: -1; */
+  top: 0px;
+  height: 100%;
+}
+.bg_wrap {
+  position: sticky;
+  top: 0px;
 }
 #canvas01,
 #canvas02 {
