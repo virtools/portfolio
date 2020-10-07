@@ -13,6 +13,7 @@ module.exports = {
   resolve: {
     //擴展路徑別名
     alias: {
+      "@fonts": path.resolve(__dirname, "./src/fonts/"),
       "@img": path.resolve(__dirname, "./src/img/"),
       "@css": path.resolve(__dirname, "./src/css/"),
       "@js": path.resolve(__dirname, "./src/js/"),
@@ -89,7 +90,7 @@ module.exports = {
       },*/
       //字型載入器
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.(woff|woff2|eot|ttf|otf|ttc)$/,
         use: [
           {
             loader: "file-loader",

@@ -35,7 +35,7 @@
                 <h6>
                   一週挑戰一個修練主題，總計九週
                   (2019/7/4-2019/9/9)，可挑選「前端工程師」、「UI
-                  設計師」的挑戰方向。
+                  設計師」的挑戰方向。<br />(2020年2月添加第十關)
                 </h6>
                 <h6 class="my-4">
                   <a
@@ -158,6 +158,10 @@ export default {
 <!--<style scoped></style>-->
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
+@font-face {
+  font-family: "genryu-H";
+  src: url(~@fonts/GenRyuMin-H.ttc);
+}
 * {
   font-family: "Noto Sans TC", var(--font-family-sans-serif);
 }

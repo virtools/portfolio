@@ -148,9 +148,7 @@ export default {
 <!--<style scoped></style>-->
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
-* {
-  font-family: "Noto Sans TC", var(--font-family-sans-serif);
-}
+
 body {
   overflow-x: hidden;
 }
