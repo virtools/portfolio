@@ -105,7 +105,7 @@ const dataList = [
     tags: "personal",
   },
   {
-    title: "代碼瀑布",
+    title: "程式碼瀑布",
     content: "",
     img_url: "./assets/personal/codeFalls.jpg",
     code_url: "https://github.com/virtools/codeFalls",
