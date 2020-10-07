@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-4 shadow-sm">
+  <div class="card mb-4 shadow">
     <div
       class="img card-img-top"
       :style="{
@@ -17,7 +17,7 @@
           :href="code_url"
           target="_blank"
           rel="nofollow noopener noreferrer"
-          >檢視代碼</a
+          >檢視程式碼</a
         >
         <a
           class="flex-fill btn btn-sm btn-success"
@@ -25,7 +25,7 @@
           :href="demo_url"
           target="_blank"
           rel="nofollow noopener noreferrer"
-          >演示</a
+          >觀看</a
         >
         <!-- </div> -->
       </div>
