@@ -92,7 +92,6 @@ export default {
     top: 0.5rem;
     font-size: 1.2rem;
     left: -2.4rem;
-    font-family: "genryu-H";
     letter-spacing: 0.1rem;
     color: #464646;
 
