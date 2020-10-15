@@ -208,6 +208,14 @@ const dataList = [
     demo_url: "https://virtools.github.io/splashPaint/",
     tags: "personal",
   },
+  {
+    title: "錄音紀錄",
+    content: "",
+    img_url: "./assets/personal/recorder.jpg",
+    code_url: "https://github.com/virtools/recorder/",
+    demo_url: "https://virtools.github.io/recorder/",
+    tags: "personal",
+  },
 ];
 
 //electricity,codeFalls,voronoiDiagram,tetris,snake,maze,particlesbase,shadowCasting
