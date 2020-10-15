@@ -1,13 +1,10 @@
 <template>
-  <div class="wrap">
+  <div class="wrap" v-cloak>
     <div class="content">
       <header class="sticky-top">
         <div class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
           <div class="container d-flex justify-content-between">
-            <a
-              href="javascript:void(0);"
-              class="navbar-brand d-flex align-items-center"
-            >
+            <a href="javascript:void(0);" class="navbar-brand d-flex align-items-center">
               <img :src="img_logo" class="img-thumbnail mr-2" />
               <strong>Portfolio</strong>
             </a>
@@ -25,17 +22,12 @@
               <div class="p-3">
                 <h6>
                   由六角學院與Adobe XD Taiwan社群所舉辦的「
-                  <a
-                    href="https://challenge.thef2e.com/"
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
+                  <a href="https://challenge.thef2e.com/" target="_blank" rel="nofollow noopener noreferrer"
                     >The F2E - 第二屆 前端 & UI 修練精神時光屋</a
                   >」
                 </h6>
                 <h6>
-                  一週挑戰一個修練主題，總計九週
-                  (2019/7/4-2019/9/9)，可挑選「前端工程師」、「UI
-                  設計師」的挑戰方向。<br />(2020年2月添加第十關)
+                  一週挑戰一個修練主題，總計九週 (2019/7/4-2019/9/9)，可挑選「前端工程師」、「UI 設計師」的挑戰方向。<br />(2020年2月添加第十關)
                 </h6>
                 <h6 class="my-4">
                   <a
@@ -53,11 +45,7 @@
           <div class="panel_R">
             <div class="py-4">
               <div class="row">
-                <div
-                  class="col-12 col-md-6 col-lg-12"
-                  v-for="item in F2E_list"
-                  :key="item.id"
-                >
+                <div class="col-12 col-md-6 col-lg-12" v-for="item in F2E_list" :key="item.id">
                   <Card01
                     :title="item.title"
                     :content="item.content"
@@ -79,11 +67,7 @@
           </div>
           <div class="mt-4">
             <div class="row">
-              <div
-                class="col-md-6 col-lg-4 col-xl-4"
-                v-for="item in personal_list"
-                :key="item.id"
-              >
+              <div class="col-md-6 col-lg-4 col-xl-4" v-for="item in personal_list" :key="item.id">
                 <Card
                   :title="item.title"
                   :content="item.content"
@@ -100,18 +84,14 @@
       <footer class="position-relative">
         <div class="info d-flex align-items-end">
           <div class="container p-3">
-            <div
-              class="text-center d-flex justify-content-center align-items-center"
-            >
+            <div class="text-center d-flex justify-content-center align-items-center">
               <div class="name">
                 <i class="material-icons align-middle">person</i>
                 <a class="align-middle">阿偉</a>
               </div>
               <div class="email ml-2">
                 <i class="material-icons align-middle">email</i>
-                <a class="align-middle" href="mailto:flashmx29403229@gmail.com"
-                  >flashmx29403229@gmail.com</a
-                >
+                <a class="align-middle" href="mailto:flashmx29403229@gmail.com">flashmx29403229@gmail.com</a>
               </div>
             </div>
           </div>
@@ -139,16 +119,12 @@ export default {
     };
   },
   mounted() {
-    Axios.get("dataList", { data: { filters: { tags: "F2E" } } }).then(
-      (response) => {
-        this.F2E_list = response.data;
-      }
-    );
-    Axios.get("dataList", { data: { filters: { tags: "personal" } } }).then(
-      (response) => {
-        this.personal_list = response.data;
-      }
-    );
+    Axios.get("dataList", { data: { filters: { tags: "F2E" } } }).then((response) => {
+      this.F2E_list = response.data;
+    });
+    Axios.get("dataList", { data: { filters: { tags: "personal" } } }).then((response) => {
+      this.personal_list = response.data;
+    });
     /*.catch((error) => {
         throw new Error(error);
       });*/
@@ -162,7 +138,10 @@ export default {
   font-family: "Noto Sans TC", var(--font-family-sans-serif);
 }
 body {
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
+}
+[v-cloak] {
+  display: none;
 }
 .wrap {
   position: relative;

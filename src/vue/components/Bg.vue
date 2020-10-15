@@ -1,6 +1,6 @@
 <template>
   <div class="bg d-block">
-    <div class="bg_wrap d-block vw-100 vh-100">
+    <div class="bg_wrap d-block vh-100">
       <canvas id="canvas01" ref="canvas01"></canvas>
       <canvas id="canvas02" ref="canvas02"></canvas>
     </div>
@@ -34,15 +34,9 @@ export default {
       options.size = options.size || 1;
       options.pos = options.pos || [0, 0];
       ctx.fillStyle = options.fillStyle;
-      posList.forEach(function (el, index) {
+      posList.forEach(function(el, index) {
         ctx.beginPath();
-        ctx.arc(
-          el[0] + options.pos[0],
-          el[1] + options.pos[1],
-          options.size,
-          0,
-          2 * Math.PI
-        );
+        ctx.arc(el[0] + options.pos[0], el[1] + options.pos[1], options.size, 0, 2 * Math.PI);
         ctx.fill();
       });
     }
@@ -56,11 +50,11 @@ export default {
       ctx.lineWidth = options.lineWidth;
       ctx.fillStyle = options.fillStyle;
 
-      triangleList.forEach(function (polygon) {
+      triangleList.forEach(function(polygon) {
         ctx.beginPath();
         drawPolygon(
           ctx,
-          polygon.points.map(function (el) {
+          polygon.points.map(function(el) {
             return pushVector(posList[el], options.pos);
           })
         );
@@ -82,11 +76,11 @@ export default {
       ctx.lineWidth = options.lineWidth;
       ctx.fillStyle = options.fillStyle;
 
-      polygonList.forEach(function (polygon, i) {
+      polygonList.forEach(function(polygon, i) {
         ctx.beginPath();
         drawPolygon(
           ctx,
-          polygon.map(function (el) {
+          polygon.map(function(el) {
             return pushVector(el, options.pos);
           })
         );
@@ -111,7 +105,7 @@ export default {
       ctx.beginPath();
       drawPolygon(
         ctx,
-        shell.map(function (el) {
+        shell.map(function(el) {
           return pushVector(posList[el], options.pos);
         })
       );
@@ -131,12 +125,7 @@ export default {
     function calcVoronoi(posList) {
       triangulationData = triangulationCreate(posList);
 
-      polygon = voronoiCreate(
-        posList,
-        triangulationData.triangleList,
-        triangulationData.shell,
-        mainRect
-      );
+      polygon = voronoiCreate(posList, triangulationData.triangleList, triangulationData.shell, mainRect);
       polygonList = polygon.polygonListShow;
     }
     let canvas01, ctx01, canvas02, ctx02, cWidth, cHeight;
@@ -211,31 +200,16 @@ export default {
       for (let i = 0; i < moveIndexListG.length; i++) {
         moveIndexListG[i] = [];
         addMoveIndex(moveIndexListG[i]);
-        addMoveIndex(
-          moveIndexListG[i],
-          moveIndexListG[i][moveIndexListG[i].length - 1]
-        );
-        addMoveIndex(
-          moveIndexListG[i],
-          moveIndexListG[i][moveIndexListG[i].length - 1]
-        );
-        addMoveIndex(
-          moveIndexListG[i],
-          moveIndexListG[i][moveIndexListG[i].length - 1]
-        );
-        addMoveIndex(
-          moveIndexListG[i],
-          moveIndexListG[i][moveIndexListG[i].length - 1]
-        );
-        addMoveIndex(
-          moveIndexListG[i],
-          moveIndexListG[i][moveIndexListG[i].length - 1]
-        );
+        addMoveIndex(moveIndexListG[i], moveIndexListG[i][moveIndexListG[i].length - 1]);
+        addMoveIndex(moveIndexListG[i], moveIndexListG[i][moveIndexListG[i].length - 1]);
+        addMoveIndex(moveIndexListG[i], moveIndexListG[i][moveIndexListG[i].length - 1]);
+        addMoveIndex(moveIndexListG[i], moveIndexListG[i][moveIndexListG[i].length - 1]);
+        addMoveIndex(moveIndexListG[i], moveIndexListG[i][moveIndexListG[i].length - 1]);
       }
     }
-    const debounce = function (func, delay = 250) {
+    const debounce = function(func, delay = 250) {
       let timeout = null;
-      return function () {
+      return function() {
         const context = this;
         const args = arguments;
         clearTimeout(timeout);
@@ -245,10 +219,8 @@ export default {
       };
     };
     function resize() {
-      mainRect.width = cWidth = canvas01.width = canvas02.width =
-        window.innerWidth;
-      mainRect.height = cHeight = canvas01.height = canvas02.height =
-        window.innerHeight;
+      mainRect.width = cWidth = canvas01.width = canvas02.width = window.innerWidth;
+      mainRect.height = cHeight = canvas01.height = canvas02.height = window.innerHeight;
       init();
     }
 
@@ -272,9 +244,7 @@ export default {
         let num =
           index === -1
             ? Math.floor(Math.random() * polygon.polygonPosList.length)
-            : lineLink[index][
-                Math.floor(Math.random() * lineLink[index].length)
-              ];
+            : lineLink[index][Math.floor(Math.random() * lineLink[index].length)];
         if (!moveIndexList.some((value) => value === num)) {
           moveIndexList.push(num);
           return;
@@ -294,10 +264,7 @@ export default {
         /*addMoveIndex(moveIndexList, moveIndexList[moveIndexList.length - 1]);
         moveIndexList.shift();*/
         for (let i = 0; i < moveIndexListG.length; i++) {
-          addMoveIndex(
-            moveIndexListG[i],
-            moveIndexListG[i][moveIndexListG[i].length - 1]
-          );
+          addMoveIndex(moveIndexListG[i], moveIndexListG[i][moveIndexListG[i].length - 1]);
           moveIndexListG[i].shift();
         }
         /*color += 5 - Math.random() * 10;
@@ -339,10 +306,7 @@ export default {
             let p2 = toPosRate(p, p1, time / interval);
             ctx02.moveTo(p2[0], p2[1]);
           } else if (index == array.length - 1) {
-            let p1 =
-              polygon.polygonPosList[
-                array[(index - 1 + array.length) % array.length]
-              ];
+            let p1 = polygon.polygonPosList[array[(index - 1 + array.length) % array.length]];
             let p2 = toPosRate(p, p1, 1 - time / interval);
             ctx02.lineTo(p2[0], p2[1]);
           } else {
@@ -366,10 +330,13 @@ export default {
   /* z-index: -1; */
   top: 0px;
   height: 100%;
+  width: 100%;
 }
 .bg_wrap {
   position: sticky;
   top: 0px;
+  width: 100%;
+  overflow: hidden;
 }
 #canvas01,
 #canvas02 {
