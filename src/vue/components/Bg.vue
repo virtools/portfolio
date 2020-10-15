@@ -165,7 +165,7 @@ export default {
     }
     function init() {
       const N = Math.ceil((cWidth * cHeight) / 1800);
-      console.log(N);
+      //console.log(N);
       posList = resetPosList(N);
       calcVoronoi(posList);
       lineLink = [];
