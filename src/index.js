@@ -36,7 +36,7 @@ Mock.mock("dataList", "get", (data) => {
             }
             const tags = el[key].split(/\,/g);
             for (let elem of tags) {
-              return condition.indexOf(elem) >= 0;
+              return condition.includes(elem);
             }
           });
         } else {
