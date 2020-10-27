@@ -182,7 +182,7 @@
     "content": "",
     "img_url": "./assets/personal/particleCollision.jpg",
     "code_url": "https://github.com/virtools/particleCollision/",
-    "demo_url": "https://virtools.github.io/particleCollision/particleCollision-quadTree/",
+    "demo_url": "https://virtools.github.io/particleCollision/dist/particleCollision-quadTree/",
     "tags": "personal"
   },
   {
