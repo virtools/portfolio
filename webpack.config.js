@@ -57,7 +57,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../",
+              //publicPath: "../",
             },
           },
           "css-loader",
@@ -70,9 +70,9 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "img/[name].[hash].[ext]",
-              /*publicPath: "../",*/
-              /*outputPath: "/",*/
+              name: "[name].[hash].[ext]",
+              outputPath: "img/",
+              publicPath: "../img",
             },
           },
         ],
@@ -95,9 +95,9 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "fonts/[name].[hash].[ext]",
-              /*publicPath: "../",*/
-              //outputPath: "./",
+              name: "[name].[hash].[ext]",
+              outputPath: "fonts/",
+              publicPath: "../fonts",
             },
           },
         ],
